@@ -60,7 +60,7 @@ class RootController(HookController):
 
 
     def _transform_to_mf2(self, result):
-        return {
+        mf2 = {
             'type': ['h-entry'],
             'properties': {
                 'name': [result['title']],
@@ -68,17 +68,21 @@ class RootController(HookController):
                     'html': result['content'],
                     'value': ''
                 }],
-                'published': [
-                    result['date_published']
-                ],
-                'author': [
-                    result['author']
-                ],
                 'syndication': [
+                    result['url']
+                ],
+                'url': [
                     result['url']
                 ]
             }
         }
+
+        if result.get('author'):
+            mf2['properties']['author'] = [result['author']]
+        if result.get('date_published'):
+            mf2['properties']['published'] = [result['date_published']]
+
+        return mf2
 
 
     def _send_micropub(self, mf2, destination, token):
