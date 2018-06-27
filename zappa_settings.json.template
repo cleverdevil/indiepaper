@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "app_function": "indiepaper.wsgi.app",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "indiepaper",
+        "runtime": "python3.6",
+        "s3_bucket": "indiepaper-zappa-dev-bucket",
+        "keep_warm": false
+    },
+    "production": {
+        "app_function": "indiepaper.wsgi.app",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "indiepaper",
+        "runtime": "python3.6",
+        "s3_bucket": "indiepaper-zappa-prod-bucket",
+        "certificate_arn": "AWS_CERT_ARN_HERE",
+        "domain": "DEPLOYMENT_DOMAIN_HERE",
+        "keep_warm": false,
+        "binary_support": false
+    }
+}

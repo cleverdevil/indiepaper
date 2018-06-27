@@ -1,0 +1,120 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Indiepaper: Read Later for Micropub</title>
+  <meta name="description" content="An open endpoint for sending articles to 'read later' via micropub.">
+  <meta name="author" content="Jonathan LaCour - https://cleverdevil.io">
+  
+  <style type="text/css">
+    body {
+      background: #333;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    header, main {
+      text-align: left;
+      background: #fff;
+      margin: 1em auto;
+      padding: 0.5em 2em;
+      width: 40em;
+    }
+
+    pre {
+      background: #ddd;
+      padding: 0.5em 1.0em;
+      overflow: hidden;
+    }
+
+    label {
+      font-weight: bold;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function generate() {
+      var destination = document.getElementById('destination').value;
+      var token = document.getElementById('token').value;
+      var b = 'javascript:void%20function(){(function(){var%20e=new%20XMLHttpRequest;var%20t=%22url=%22+document.URL;e.open(%22POST%22,%22https://indiepaper.cleverdevil.io%22,!0),e.setRequestHeader(%22Content-Type%22,%22application/x-www-form-urlencoded%22),e.setRequestHeader(%22mp-destination%22,%22' + destination + '%22),e.setRequestHeader(%22Authorization%22,%22Bearer%20' + token + '%22),e.onreadystatechange=function(){4==e.readyState%26%26200==e.status%26%26alert(%22Saved!%22)},e.send(t)})()}();';
+      
+      document.getElementById('bookmarklet').href = b;
+
+      document.getElementById('bookmarklet-container').style.display = 'block';
+      document.getElementById('bookmarklet-form').style.display = 'none';
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Indiepaper</h1>
+    <p>
+      A "read later" service for <a href="https://indieweb.org/Micropub">Micropub</a> and <a href="https://indieweb.org/Microsub">Microsub</a> servers.
+    </p>
+  </header>
+
+  <main>
+    
+    <section>
+      <h2>Using Indiepaper</h2>
+      <p>
+        If you spend a lot of your time in an 
+        <a href="https://indieweb.org/reader">indie reader</a> like 
+        <a href="https://indieweb.org/Together">Together</a>, 
+        <a href="https://indieweb.org/Indigenous">Indigenous</a>, or
+        <a href="https://indieweb.org/Monocle">Monocle</a>, you may want
+        to save articles into a "read later" queue.
+      </p>
+      <p>
+        Enter Indiepaper! You can send a special HTTP POST request to 
+        Indiepaper, and it will extract the content of any article on
+        the web (ad free!) and publish it to the Micropub endpoint of 
+        your choosing. You can use this functionality with your 
+        Microsub server, such as <a href="https://indieweb.org/Aperture">Aperture</a>,
+        to publish these articles for later consumption into a special channel.
+      </p>
+    </section>
+    
+    <section>
+      <h2>Sample</h2>
+      <p>
+        If you wanted to save 
+        <a href="https://www.theverge.com/2018/6/27/17509888/oumuamua-interstellar-comet-asteroid-solar-system-trajectory">this interesting article from The Verge</a>
+        to your read later channel, which you have created in Aperture with an API key of <code>XXXXXXX</code>, you would create the request
+        as follows:
+      </p>
+      <pre>
+POST / HTTP/1.1
+Host: indiepaper.cleverdevil.io
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer XXXXXXXX
+mp-destination: https://aperture.p3k.io/micropub
+
+url=https://www.theverge.com/2018/6/27/17509888/oumuamua-interstellar-comet-asteroid-solar-system-trajectory
+      </pre>
+    </section>
+    <section>
+      <h2>Bookmarklet</h2>
+      <p>
+        To make it easier to use Indiepaper, generate yourself a bookmarklet:
+      </p>
+      
+      <div id="bookmarklet-form">
+      <label for="destination">Micropub Target URL:</label>
+      <input type="text" name="destination" id="destination">
+      <label for="token">Bearer Token:</label>
+      <input type="text" name="token" id="token">
+      <button onclick="generate()">Generate</button>
+      </div>
+      <div id="bookmarklet-container" style="display: none">
+        <a id="bookmarklet" href="http://example.com">Read Later</a>
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>
