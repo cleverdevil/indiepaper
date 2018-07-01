@@ -47,3 +47,12 @@ Indiepaper is available as a hosted service at
 [https://indiepaper.cleverdevil.io](https://indiepaper.cleverdevil.io). If you
 visit the website, you'll also find a useful tool to generate you a "Read Later"
 bookmarklet for saving articles via Indiepaper.
+
+
+iOS Workflow
+------------
+
+There is an [iOS Workflow](https://cleverdevil.io/s/hgmKUXa4o2jaHozClixV.wflow)
+available for sending URLs into Indiepaper throughout the system. Download and
+install the workflow, then change the Authorization header and mp-destination
+header to match your use case.
