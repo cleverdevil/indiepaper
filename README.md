@@ -23,44 +23,10 @@ Indiepaper is powered by [Mercury by Postlight
 Labs](https://mercury.postlight.com/web-parser/).
 
 
-Sample
-------
-
-If you wanted to save this interesting article from The Verge to your read later
-channel, which you have created in Aperture with an API key of XXXXXXX, you
-would create the request as follows:
-
-```
-POST / HTTP/1.1
-Host: indiepaper.cleverdevil.io
-Content-Type: application/x-www-form-urlencoded
-Authorization: Bearer XXXXXXXX
-mp-destination: https://aperture.p3k.io/micropub
-
-url=https://www.theverge.com/2018/6/27/17509888/oumuamua-interstellar-comet-asteroid-solar-system-trajectory
-```
-
 Indiepaper Public Service
 -------------------------
 
 Indiepaper is available as a hosted service at
-[https://indiepaper.cleverdevil.io](https://indiepaper.cleverdevil.io). If you
-visit the website, you'll also find a useful tool to generate you a "Read Later"
-bookmarklet for saving articles via Indiepaper.
-
-
-iOS Workflow
-------------
-
-There is an [iOS Workflow](https://cleverdevil.io/s/hgmKUXa4o2jaHozClixV.wflow)
-available for sending URLs into Indiepaper throughout the system. Download and
-install the workflow, then change the Authorization header and mp-destination
-header to match your use case.
-
-
-macOS Sharing Extension
------------------------
-
-There is also a [macOS sharing extension
-available](https://github.com/cleverdevil/Indiepaper-macOS/releases) to add
-system-wide "Send to Indiepaper" capability to macOS.
+[https://indiepaper.io](https://indiepaper.io). If you visit the website, you'll
+also find a useful tool to generate you a "Read Later" bookmarklet for saving
+articles via Indiepaper, plus links to an iOS Workflow and a native macOS app.

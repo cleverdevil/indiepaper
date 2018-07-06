@@ -16,9 +16,9 @@ class RootController(HookController):
 
     __hooks__ = [CorsHook()]
 
-    @expose(generic=True, template='index.html')
+    @expose(generic=True)
     def index(self):
-        return dict()
+        redirect('https://www.indiepaper.io/')
 
 
     @index.when(method='POST', template='json')
