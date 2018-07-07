@@ -4,6 +4,10 @@ from pecan.hooks import HookController, PecanHook
 import requests
 import json
 
+
+from .indieauth import IndieAuthController
+
+
 class CorsHook(PecanHook):
 
     def after(self, state):
@@ -15,6 +19,8 @@ class CorsHook(PecanHook):
 class RootController(HookController):
 
     __hooks__ = [CorsHook()]
+
+    indieauth = IndieAuthController()
 
     @expose(generic=True)
     def index(self):

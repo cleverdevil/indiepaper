@@ -15,7 +15,9 @@ setup(
     install_requires=[
         "pecan",
         "requests",
-        "zappa"
+        "zappa",
+        "bs4",
+        "beaker"
     ],
     test_suite='indiepaper',
     zip_safe=False,
