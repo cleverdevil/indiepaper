@@ -17,7 +17,8 @@ setup(
         "requests",
         "zappa",
         "bs4",
-        "beaker"
+        "beaker",
+        "mf2py"
     ],
     test_suite='indiepaper',
     zip_safe=False,
