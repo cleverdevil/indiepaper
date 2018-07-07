@@ -24,8 +24,8 @@ class RootController(HookController):
 
     @expose(generic=True)
     def index(self):
-        redirect('https://www.indiepaper.io/')
-
+        if request.method == 'GET':
+            redirect('https://www.indiepaper.io/')
 
     @index.when(method='POST', template='json')
     def index_post(self, url):
