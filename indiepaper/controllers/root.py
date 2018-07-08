@@ -27,8 +27,9 @@ class RootController(HookController):
         if request.method == 'GET':
             redirect('https://www.indiepaper.io/')
 
+
     @index.when(method='POST', template='json')
-    def index_post(self, url):
+    def index_post(self, url, category=None):
         # get the micropub information from the headers
         destination = request.headers.get('mp-destination')
         token = request.headers.get('Authorization')
@@ -42,6 +43,13 @@ class RootController(HookController):
 
         # parse URL
         mf2 = parse(url)
+
+        # add categories, if they're specified
+        if category is not None:
+            if isinstance(category, list):
+                mf2['properties']['category'] = category
+            elif isinstance(category, str):
+                mf2['properties']['category'] = [category]
 
         # send micropub request
         if mf2:
