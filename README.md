@@ -19,8 +19,8 @@ the Micropub endpoint of your choosing. You can use this functionality with your
 Microsub server, such as [Aperture](https://indieweb.org/Aperture), to publish
 these articles for later consumption into a special channel.
 
-Indiepaper is powered by [Mercury by Postlight
-Labs](https://mercury.postlight.com/web-parser/).
+Indiepaper is powered by [mf2py](http://microformats.org/wiki/mf2py) and 
+[Mercury by Postlight Labs](https://mercury.postlight.com/web-parser/) 
 
 
 Indiepaper Public Service
