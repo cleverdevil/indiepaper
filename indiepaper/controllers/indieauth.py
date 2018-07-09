@@ -1,5 +1,6 @@
 from uuid import uuid4
 from urllib.parse import urlencode
+from http import cookies
 
 from pecan import expose, redirect, request
 
@@ -32,10 +33,24 @@ class IndieAuthController(object):
         if not result:
             return 'Error: no token returned from token endpoint'
 
-        target = 'https://www.indiepaper.io/indieauth.html?'
-        target = target + urlencode({
-            'me': session['me'],
-            'token': result['token'],
-            'endpoint': result['micropub']
-        })
-        redirect(target)
+        target = 'https://www.indiepaper.io/indieauth.html?success=true'
+
+        c = cookies.SimpleCookie()
+        c['indiepaper-me'] = session['me']
+        c['indiepaper-me']['domain'] = '.indiepaper.io'
+        c['indiepaper-me']['path'] = '/'
+
+        c['indiepaper-token'] = result['token']
+        c['indiepaper-token']['domain'] = '.indiepaper.io'
+        c['indiepaper-token']['path'] = '/'
+
+        c['indiepaper-endpoint'] = result['micropub']
+        c['indiepaper-endpoint']['domain'] = '.indiepaper.io'
+        c['indiepaper-endpoint']['path'] = '/'
+
+        headers = [
+            ('Set-Cookie', morsel.OutputString())
+            for morsel in c.values()
+        ]
+
+        redirect(target, headers=headers)
