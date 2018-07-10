@@ -61,6 +61,12 @@ def parse_with_mf2py(url):
 
     item = result['items'][0]
 
+    if not item['properties'].get('name'):
+        return None
+
+    if not item['properties'].get('content'):
+        return None
+
     mf2 = {
         'type': ['h-entry'],
         'properties': {
