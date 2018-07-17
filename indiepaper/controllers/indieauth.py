@@ -10,13 +10,17 @@ from indiepaper import indieauth
 class IndieAuthController(object):
 
     @expose()
-    def index(self, me=''):
+    def index(self, me='', app=False):
         if not me:
             return 'Must specify a `me` parameter'
 
         session = request.environ['beaker.session']
         session['me'] = me
         session['state'] = str(uuid4())
+
+        if app:
+            session['app'] = True
+
         session.save()
 
         indieauth.request_authorization(me, session['state'])
@@ -34,6 +38,9 @@ class IndieAuthController(object):
             return 'Error: no token returned from token endpoint'
 
         target = 'https://www.indiepaper.io/indieauth.html?success=true'
+
+        if session.get('app', False) == True:
+            target += '&app=true'
 
         c = cookies.SimpleCookie()
         c['indiepaper-me'] = session['me']
