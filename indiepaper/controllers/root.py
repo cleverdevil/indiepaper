@@ -13,7 +13,7 @@ class CorsHook(PecanHook):
     def after(self, state):
         state.response.headers['Access-Control-Allow-Origin'] = '*'
         state.response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-        state.response.headers['Access-Control-Allow-Headers'] = 'origin, authorization, accept, mp-destination'
+        state.response.headers['Access-Control-Allow-Headers'] = 'origin, authorization, accept, mp-destination, x-indiepaper-destination'
 
 
 class RootController(HookController):
@@ -31,11 +31,13 @@ class RootController(HookController):
     @index.when(method='POST', template='json')
     def index_post(self, url, category=None):
         # get the micropub information from the headers
-        destination = request.headers.get('mp-destination')
+        destination = request.headers.get('x-indiepaper-destination')
+        if destination is None:
+            destination = request.headers.get('mp-destination')
         token = request.headers.get('Authorization')
 
         if not destination:
-            abort(400, detail='No micropub destination specified in "mp-destination" header.')
+            abort(400, detail='No micropub destination specified in "x-indiepaper-destination" header.')
         elif not token:
             abort(400, detail='No bearer token provided in "Authorization" header.')
         elif not url:

@@ -43,7 +43,7 @@ def request_authorization(me, state):
         'redirect_uri': 'https://indiepaper.io/indieauth/callback',
         'client_id': 'https://indiepaper.io',
         'state': state,
-        'scope': 'save',
+        'scope': 'save create update',
         'response_type': 'code'
     }
     auth_target = auth_endpoint + '?' + urlencode(ns)
